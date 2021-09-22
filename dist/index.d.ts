@@ -1,1 +1,2 @@
-export { getNews } from './news/getNews';
+import { getNews } from './news/getNews';
+export { getNews }
