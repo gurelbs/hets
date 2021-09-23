@@ -1,6 +1,6 @@
-import getNews from './news/getNews';
+import { getNews } from './news/getNews';
 
-export default class Answers {
+export class Answers {
   async news(term: string | string[], lang: string = 'he') {
     try {
       const answer = await getNews(term, lang);
