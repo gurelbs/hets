@@ -1,8 +1,9 @@
 {
   "name": "hets",
   "version": "1.0.13",
-  "description": "",
+  "description": "open-source engine with API for Real-time questions In Hebrew.",
   "main": "lib/index.js",
+  "type": "module",
   "types": "lib/index.d.ts",
   "files": ["lib/**/*"],
   "scripts": {
