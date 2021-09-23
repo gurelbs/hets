@@ -1,6 +1,6 @@
 {
   "name": "hets",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,7 +10,7 @@
     "lint": "tslint -p tsconfig.json",
     "build": "tsc",
     "github": "git add . && git commit -m 'updated' && git push origin main",
-    "deploy": "npm run build && npm run github"
+    "deploy": "npm run build && npm run github && npm publish"
   },
   "repository": {
     "type": "git",
