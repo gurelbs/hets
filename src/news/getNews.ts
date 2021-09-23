@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer" 
+import puppeteer from 'puppeteer';
 
 export interface News {
   link: string;
@@ -11,7 +11,7 @@ export type NewsRes = string | [] | News[] | Err;
 
 const CATCH = new Map();
 
-export default async function getNews(term: string | string[], lang: string = 'he'): Promise<NewsRes> {
+export default async function getNews(term: string | string[], lang: string = 'he'): Promise<NewsRes>{
   let res: NewsRes;
   const isSearch = `search?q=${term}&hl=${lang}`;
   const isTopStories = `topstories?hl=${lang}`;
@@ -34,7 +34,7 @@ export default async function getNews(term: string | string[], lang: string = 'h
     await page.goto(url);
     const isNews = await page.$('body');
     if (isNews) {
-      // console.log('found news')
+// console.log('found news')
       await page.waitForSelector('body');
       res = await page.evaluate(() =>
         [...document.querySelectorAll('article')].map((article) => ({
