@@ -1,4 +1,2 @@
-export declare class Answers {
-    news(term: string | string[], lang?: string): Promise<unknown>;
-}
+export { getNews } from './news/getNews';
 //# sourceMappingURL=index.d.ts.map
