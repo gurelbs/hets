@@ -13,7 +13,7 @@
     "lint": "tslint -p tsconfig.json",
     "build": "tsc",
     "github": "git add . && git commit -m 'updated' && git push origin main",
-    "deploy": "npm run build && npm run github && npm publish"
+    "deploy": "npm run github && npm publish"
   },
   "repository": {
     "type": "git",
