@@ -1,6 +1,6 @@
 import {getNews} from './news/getNews';
 
-class Answers {
+export default class Answers {
   async news(term: string | string[], lang: string = 'he') {
     try {
       return await getNews(term, lang);
@@ -8,7 +8,4 @@ class Answers {
       return error;
     }
   }
-}
-export {
-  Answers,
 }

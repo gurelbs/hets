@@ -12,6 +12,6 @@
     "outDir": "./lib",
     "lib": [ "es5", "es6", "dom", "dom.iterable","ESNext" ]
   },
-  "include": [ "src" ],
+  "include": [ "src/**/*" ],
   "exclude": [ "node_modules", ]
 }
