@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "baseUrl": "./",
-    "target": "es2015",
+    "allowUmdGlobalAccess":true,
+    "target": "ESNext",
     "declaration": true,
     "outDir": "./dist"
   },

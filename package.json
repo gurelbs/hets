@@ -1,6 +1,6 @@
 {
   "name": "hets",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "/dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "git add . && git commit -m 'updated' && git push origin main && npm publish"
   },
   "repository": {
     "type": "git",
