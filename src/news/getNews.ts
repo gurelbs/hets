@@ -34,7 +34,6 @@ export default async function getNews(term: string | string[], lang: string = 'h
     await page.goto(url);
     const isNews = await page.$('body');
     if (isNews) {
-      // console.log('found news')
       await page.waitForSelector('body');
       res = await page.evaluate(() =>
         [...document.querySelectorAll('article')].map((article) => ({
