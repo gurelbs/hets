@@ -1,4 +1,4 @@
-const getNews = require('./news/getNews')
+import getNews from './news/getNews';
 
 export default class Answers {
   async news(term: string | string[], lang: string = 'he') {
