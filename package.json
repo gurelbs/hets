@@ -1,6 +1,6 @@
 {
   "name": "hets",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "/dist"
   ],
   "scripts": {
-    "deploy": "git add . && git commit -m 'updated' && git push origin main && npm publish"
+    "deploy": "git add . && git commit -m 'updated' && git push origin main && tsc && npm publish"
   },
   "repository": {
     "type": "git",
