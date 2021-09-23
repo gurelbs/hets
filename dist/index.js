@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getNews = void 0;
-var getNews_1 = require("./news/getNews");
-Object.defineProperty(exports, "getNews", { enumerable: true, get: function () { return getNews_1.getNews; } });
+exports.Answers = void 0;
+const Answers_1 = require("./Answers");
+exports.Answers = Answers_1.default;

@@ -45,17 +45,3 @@ async function getNews(term, lang = 'he') {
     }
 }
 exports.getNews = getNews;
-// if (res){
-// for (let i = 0; i < res.length; i++) {
-// 	try {
-// 		await page.goto(res[i].link, {
-// 			"waitUntil": "networkidle2",
-// 			"timeout": 10000
-// 		})
-// 		let directLink = await page.evaluate(() => document.location.href)
-// 		console.log(directLink);
-// 	} catch (error) {
-// 		console.log('timeout');
-// 	}
-// }
-// console.log(await getNews(''));
