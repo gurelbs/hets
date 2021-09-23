@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
+    "target": "esnext",
     "esModuleInterop": true,
+    "useDefineForClassFields":true,
+    "explainFiles": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
     "declaration": true,
     "outDir": "./lib",
-    "lib": [ "es5", "es6", "dom", "dom.iterable" ]
+    "lib": [ "es5", "es6", "dom", "dom.iterable","ESNext" ]
   },
   "include": [ "src" ],
   "exclude": [ "node_modules", ]
