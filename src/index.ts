@@ -10,5 +10,6 @@ export default class Answers {
   }
 }
 export {
+  Answers,
   getNews as news
 }
