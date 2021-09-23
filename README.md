@@ -20,8 +20,10 @@ npm i hets
 
 ```sh
 
-import { getNews } from 'hejs'
-
+import Answers from 'hets'
+const { news } = new Answers()
+# or
+import { news } from 'hets'
 ```
 ## Usage
 
