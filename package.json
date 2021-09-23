@@ -1,13 +1,15 @@
 {
   "name": "hets",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "open-source engine with API for Real-time questions In Hebrew.",
   "main": "lib/index.js",
   "type": "module",
   "types": "lib/index.d.ts",
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "prepublishOnly" : "npm run lint",
+    "prepublishOnly": "npm run lint",
     "lint": "tslint -p tsconfig.json",
     "build": "tsc",
     "github": "git add . && git commit -m 'updated' && git push origin main",
@@ -17,7 +19,14 @@
     "type": "git",
     "url": "git+https://github.com/gurelbs/hets.git"
   },
-  "keywords": ["hets","hebrew","language","morphology","morphological","analysis"],
+  "keywords": [
+    "hets",
+    "hebrew",
+    "language",
+    "morphology",
+    "morphological",
+    "analysis"
+  ],
   "author": "Gurel Ben Shabat",
   "license": "ISC",
   "bugs": {

@@ -1,4 +1,5 @@
-import { launch } from 'puppeteer';
+import puppeteer = require('puppeteer');
+
 export interface News {
   link: string;
   header: string;
@@ -7,6 +8,7 @@ export interface News {
 }
 export type Err = undefined | unknown;
 export type NewsRes = string | [] | News[] | Err;
+
 const CATCH = new Map();
 
 export default async function getNews(term: string | string[], lang: string = 'he'): Promise<NewsRes> {
@@ -26,7 +28,7 @@ export default async function getNews(term: string | string[], lang: string = 'h
   }
   try {
     if (CATCH.has(url)) return CATCH.get(url);
-    const browser = await launch({ args: ['--no-sandbox'] });
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const context = await browser.createIncognitoBrowserContext();
     const page = await context.newPage();
     await page.goto(url);
