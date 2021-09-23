@@ -1,8 +1,8 @@
 {
   "name": "hets",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/gurelbs/hets#readme",
   "dependencies": {
-    "puppeteer": "^10.0.0"
+    "puppeteer": "^10.4.0"
   }
 }
