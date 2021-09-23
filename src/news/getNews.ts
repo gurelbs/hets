@@ -1,21 +1,29 @@
 import {launch} from 'puppeteer'
-import {News,Err} from './../types'
+export interface News { 
+  link: string; 
+  header: string; 
+  time: string; 
+  origin: string; 
+}
+export type Err = undefined | unknown
+export type NewsRes = string | [] | News[] | Err
 const CATCH = new Map()
 
 export async function getNews(
-	term:string|object, 
+	term:string | string[], 
 	lang:string = 'he'
-	): Promise<News[] | Err> {
-	let res:string | News[],
-		isSearch = `search?q=${term}&hl=${lang}`, 
-		isTopStories = `topstories?hl=${lang}`, 
-		err = `לא מצאתי חדשות על ${term}`,
-		url = `https://news.google.com/${ term ? isSearch : isTopStories }`;
+	): Promise<NewsRes> {
+	let res:NewsRes;
+	const isSearch = `search?q=${term}&hl=${lang}`;
+	const isTopStories = `topstories?hl=${lang}`;
+	const err = `לא מצאתי חדשות על ${term}`;
+	const url = `https://news.google.com/${ term ? isSearch : isTopStories }`;
 
 	if (term && typeof term === 'object') {
-		let resultArray = []
+		const resultArray:News[] = [];
 		for (let i = 0; i < Object.values(term).length; i++) {
-			resultArray.push(await getNews(term[i], lang))
+			const result:any = await getNews(term[i], lang)
+			resultArray.push(result)
 		}
 		return resultArray
 	}
@@ -25,17 +33,17 @@ export async function getNews(
 		const context = await browser.createIncognitoBrowserContext()
 		const page = await context.newPage()
 		await page.goto(url)
-		let isNews = await page.$('body')
+		const isNews = await page.$('body')
 		if (isNews) {
-			console.log('found news')
+			// console.log('found news')
 			await page.waitForSelector('body')
-			res = await page.evaluate(() =>
-				[...document.querySelectorAll('article')].map(x => ({
-					link: x.parentElement.querySelector('a').href,
-					header: x.children[1].textContent,
-					time: [...x.children[2].children[0].children].filter(x => x.tagName === 'TIME')[0]
+			res = await page.evaluate(() => 
+				[...document.querySelectorAll('article')].map( article => ({
+					link: article?.parentElement?.querySelector('a')?.href,
+					header: article.children[1].textContent,
+					time: [...article.children[2].children[0].children].filter(x => x.tagName === 'TIME')[0]
 						?.textContent,
-					origin: x.children[2].children[0].children[1].textContent,
+					origin: article.children[2].children[0].children[1].textContent,
 				}))
 			)
 		} else return err
@@ -45,7 +53,6 @@ export async function getNews(
 			return res
 		}
 	} catch (error) {
-		console.log(error)
 		return error
 	}
 }

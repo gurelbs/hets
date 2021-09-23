@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "allowUmdGlobalAccess":true,
-    "target": "ESNext",
+    "downlevelIteration": true,
     "declaration": true,
-    "outDir": "./dist"
+    "target": "es5",
+    "outDir": "./lib",
+    "strict": true,
+    "lib": [ "es5", "es6", "dom", "dom.iterable","ESNext" ]
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": [ "src" ],
+  "exclude": [ "node_modules", ]
 }
