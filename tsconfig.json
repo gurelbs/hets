@@ -8,7 +8,6 @@
     "downlevelIteration": true,
     "declaration": true,
     "outDir": "./lib",
-    "strict": true,
     "lib": [ "es5", "es6", "dom", "dom.iterable" ]
   },
   "include": [ "src" ],
