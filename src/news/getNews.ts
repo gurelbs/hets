@@ -1,13 +1,11 @@
 import {launch} from 'puppeteer'
+import {News,Err} from './../types'
 const CATCH = new Map()
-interface News { 
-  link: string; 
-  header: string; 
-  time: string; 
-  origin: string; 
-}
-type Err = string
-export async function getNews(term:string|object, lang:string = 'he'): Promise<News[] | Err> {
+
+export async function getNews(
+	term:string|object, 
+	lang:string = 'he'
+	): Promise<News[] | Err> {
 	let res:string | News[],
 		isSearch = `search?q=${term}&hl=${lang}`, 
 		isTopStories = `topstories?hl=${lang}`, 
@@ -51,18 +49,3 @@ export async function getNews(term:string|object, lang:string = 'he'): Promise<N
 		return error
 	}
 }
-
-// if (res){
-	// for (let i = 0; i < res.length; i++) {
-		// 	try {
-			// 		await page.goto(res[i].link, {
-	// 			"waitUntil": "networkidle2",
-	// 			"timeout": 10000
-	// 		})
-	// 		let directLink = await page.evaluate(() => document.location.href)
-	// 		console.log(directLink);
-	// 	} catch (error) {
-		// 		console.log('timeout');
-		// 	}
-		// }
-// console.log(await getNews(''));

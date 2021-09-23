@@ -1,1 +1,2 @@
-export { getNews } from './news/getNews'
+import Answers from './Answers'
+export {Answers}
