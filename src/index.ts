@@ -1,4 +1,4 @@
-import getNews from './news/getNews';
+import {getNews} from './news/getNews';
 
 class Answers {
   async news(term: string | string[], lang: string = 'he') {
@@ -9,4 +9,6 @@ class Answers {
     }
   }
 }
-export default Answers
+export {
+  Answers,
+}
