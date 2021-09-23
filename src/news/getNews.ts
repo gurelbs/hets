@@ -9,7 +9,7 @@ export type Err = undefined | unknown;
 export type NewsRes = string | [] | News[] | Err;
 const CATCH = new Map();
 
-export async function getNews(term: string | string[], lang: string = 'he'): Promise<string | [] | News[] | Err> {
+export default async function getNews(term: string | string[], lang: string = 'he'): Promise<NewsRes> {
   let res: NewsRes;
   const isSearch = `search?q=${term}&hl=${lang}`;
   const isTopStories = `topstories?hl=${lang}`;
