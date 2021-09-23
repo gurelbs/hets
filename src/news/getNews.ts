@@ -1,4 +1,4 @@
-import puppeteer = require('puppeteer');
+import puppeteer from "puppeteer" 
 
 export interface News {
   link: string;

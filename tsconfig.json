@@ -2,6 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
     "downlevelIteration": true,
     "declaration": true,
     "outDir": "./lib",
