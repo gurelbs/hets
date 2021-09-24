@@ -1,0 +1,1 @@
+export { getNews as news } from './news/getNews';
