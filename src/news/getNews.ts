@@ -17,15 +17,17 @@ export async function getNews(term: string | string[], lang: string = 'he'): Pro
   const isTopStories = `topstories?hl=${lang}`;
   const err = `לא מצאתי חדשות על ${term}`;
   const url = `https://news.google.com/${term ? isSearch : isTopStories}`;
+  if (CATCH.has(url)) return CATCH.get(url);
 
   try {
-    if (CATCH.has(url)) return CATCH.get(url);
     if (term && typeof term === 'object') {
+      if (CATCH.has(url)) return CATCH.get(url);
       const resultArray: News[] = [];
       for (const word of term) {
         const result:any = await getNews(word, lang);
         resultArray.push(result);
       }
+      CATCH.set(url, resultArray);
       return resultArray;
     }
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] });

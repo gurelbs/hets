@@ -22,15 +22,18 @@ function getNews(term, lang = 'he') {
         const isTopStories = `topstories?hl=${lang}`;
         const err = `לא מצאתי חדשות על ${term}`;
         const url = `https://news.google.com/${term ? isSearch : isTopStories}`;
+        if (CATCH.has(url))
+            return CATCH.get(url);
         try {
-            if (CATCH.has(url))
-                return CATCH.get(url);
             if (term && typeof term === 'object') {
+                if (CATCH.has(url))
+                    return CATCH.get(url);
                 const resultArray = [];
                 for (const word of term) {
                     const result = yield getNews(word, lang);
                     resultArray.push(result);
                 }
+                CATCH.set(url, resultArray);
                 return resultArray;
             }
             const browser = yield puppeteer_1.default.launch({ args: ['--no-sandbox'] });
