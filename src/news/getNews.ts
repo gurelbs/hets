@@ -18,14 +18,14 @@ export async function getNews(term: string | string[], lang: string = 'he'): Pro
   const err = `לא מצאתי חדשות על ${term}`;
   const url = `https://news.google.com/${term ? isSearch : isTopStories}`;
 
-  if (term && typeof term === 'object') {
-    const resultArray: News[] = [];
-    for (const word of term) {
-      const result:any = await getNews(word, lang);
-      resultArray.push(result);
-    }
-    return resultArray;
-  }
+  // if (term && typeof term === 'object') {
+  //   const resultArray: News[] = [];
+  //   for (const word of term) {
+  //     const result:any = await getNews(word, lang);
+  //     resultArray.push(result);
+  //   }
+  //   return resultArray;
+  // }
   try {
     if (CATCH.has(url)) return CATCH.get(url);
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
