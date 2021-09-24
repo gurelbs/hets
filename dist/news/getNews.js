@@ -41,7 +41,7 @@ function getNews(term, lang = 'he') {
             if (isNews) {
                 // console.log('found news')
                 yield page.waitForSelector('body');
-                res = yield page.evaluate(() => document.querySelectorAll('article').forEach((article) => {
+                res = yield page.evaluate(() => [...document.querySelectorAll('article')].map((article) => {
                     var _a, _b, _c;
                     return ({
                         link: (_b = (_a = article === null || article === void 0 ? void 0 : article.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('a')) === null || _b === void 0 ? void 0 : _b.href,

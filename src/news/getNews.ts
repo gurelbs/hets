@@ -37,7 +37,7 @@ export async function getNews(term: string | string[], lang: string = 'he'): Pro
 // console.log('found news')
       await page.waitForSelector('body');
       res = await page.evaluate(() =>
-        document.querySelectorAll('article').forEach((article) => ({
+      [...document.querySelectorAll('article')].map((article) => ({
           link: article?.parentElement?.querySelector('a')?.href,
           header: article.children[1].textContent,
           time: [...article.children[2].children[0].children].filter((x) => x.tagName === 'TIME')[0]?.textContent,
