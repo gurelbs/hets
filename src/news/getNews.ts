@@ -20,7 +20,7 @@ export async function getNews(term: string | string[], lang: string = 'he'): Pro
 
   if (term && typeof term === 'object') {
     const resultArray: News[] = [];
-    for (let word of term) {
+    for (const word of term) {
       const result:any = await getNews(word, lang);
       resultArray.push(result);
     }
