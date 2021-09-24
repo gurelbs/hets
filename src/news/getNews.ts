@@ -18,16 +18,16 @@ export async function getNews(term: string | string[], lang: string = 'he'): Pro
   const err = `לא מצאתי חדשות על ${term}`;
   const url = `https://news.google.com/${term ? isSearch : isTopStories}`;
 
-  // if (term && typeof term === 'object') {
-  //   const resultArray: News[] = [];
-  //   for (const word of term) {
-  //     const result:any = await getNews(word, lang);
-  //     resultArray.push(result);
-  //   }
-  //   return resultArray;
-  // }
   try {
     if (CATCH.has(url)) return CATCH.get(url);
+    if (term && typeof term === 'object') {
+      const resultArray: News[] = [];
+      for (const word of term) {
+        const result:any = await getNews(word, lang);
+        resultArray.push(result);
+      }
+      return resultArray;
+    }
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const context = await browser.createIncognitoBrowserContext();
     const page = await context.newPage();
@@ -37,7 +37,7 @@ export async function getNews(term: string | string[], lang: string = 'he'): Pro
 // console.log('found news')
       await page.waitForSelector('body');
       res = await page.evaluate(() =>
-        [...document.querySelectorAll('article')].map((article) => ({
+        document.querySelectorAll('article').forEach((article) => ({
           link: article?.parentElement?.querySelector('a')?.href,
           header: article.children[1].textContent,
           time: [...article.children[2].children[0].children].filter((x) => x.tagName === 'TIME')[0]?.textContent,

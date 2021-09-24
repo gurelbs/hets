@@ -35,6 +35,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -70,42 +81,73 @@ var CATCH = new Map();
 function getNews(term, lang) {
     if (lang === void 0) { lang = 'he'; }
     return __awaiter(this, void 0, void 0, function () {
-        var res, isSearch, isTopStories, err, url, browser, context, page, isNews, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var res, isSearch, isTopStories, err, url, resultArray, term_1, term_1_1, word, result, e_1_1, browser, context, page, isNews, error_1;
+        var e_1, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     isSearch = "search?q=" + term + "&hl=" + lang;
                     isTopStories = "topstories?hl=" + lang;
                     err = "\u05DC\u05D0 \u05DE\u05E6\u05D0\u05EA\u05D9 \u05D7\u05D3\u05E9\u05D5\u05EA \u05E2\u05DC " + term;
                     url = "https://news.google.com/" + (term ? isSearch : isTopStories);
-                    _a.label = 1;
+                    _b.label = 1;
                 case 1:
-                    _a.trys.push([1, 13, , 14]);
+                    _b.trys.push([1, 22, , 23]);
                     if (CATCH.has(url))
                         return [2 /*return*/, CATCH.get(url)];
-                    return [4 /*yield*/, puppeteer_1.default.launch({ args: ['--no-sandbox'] })];
+                    if (!(term && typeof term === 'object')) return [3 /*break*/, 10];
+                    resultArray = [];
+                    _b.label = 2;
                 case 2:
-                    browser = _a.sent();
-                    return [4 /*yield*/, browser.createIncognitoBrowserContext()];
+                    _b.trys.push([2, 7, 8, 9]);
+                    term_1 = __values(term), term_1_1 = term_1.next();
+                    _b.label = 3;
                 case 3:
-                    context = _a.sent();
-                    return [4 /*yield*/, context.newPage()];
+                    if (!!term_1_1.done) return [3 /*break*/, 6];
+                    word = term_1_1.value;
+                    return [4 /*yield*/, getNews(word, lang)];
                 case 4:
-                    page = _a.sent();
-                    return [4 /*yield*/, page.goto(url)];
+                    result = _b.sent();
+                    resultArray.push(result);
+                    _b.label = 5;
                 case 5:
-                    _a.sent();
+                    term_1_1 = term_1.next();
+                    return [3 /*break*/, 3];
+                case 6: return [3 /*break*/, 9];
+                case 7:
+                    e_1_1 = _b.sent();
+                    e_1 = { error: e_1_1 };
+                    return [3 /*break*/, 9];
+                case 8:
+                    try {
+                        if (term_1_1 && !term_1_1.done && (_a = term_1.return)) _a.call(term_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                    return [7 /*endfinally*/];
+                case 9: return [2 /*return*/, resultArray];
+                case 10: return [4 /*yield*/, puppeteer_1.default.launch({ args: ['--no-sandbox'] })];
+                case 11:
+                    browser = _b.sent();
+                    return [4 /*yield*/, browser.createIncognitoBrowserContext()];
+                case 12:
+                    context = _b.sent();
+                    return [4 /*yield*/, context.newPage()];
+                case 13:
+                    page = _b.sent();
+                    return [4 /*yield*/, page.goto(url)];
+                case 14:
+                    _b.sent();
                     return [4 /*yield*/, page.$('body')];
-                case 6:
-                    isNews = _a.sent();
-                    if (!isNews) return [3 /*break*/, 9];
+                case 15:
+                    isNews = _b.sent();
+                    if (!isNews) return [3 /*break*/, 18];
                     // console.log('found news')
                     return [4 /*yield*/, page.waitForSelector('body')];
-                case 7:
+                case 16:
                     // console.log('found news')
-                    _a.sent();
+                    _b.sent();
                     return [4 /*yield*/, page.evaluate(function () {
-                            return __spreadArray([], __read(document.querySelectorAll('article')), false).map(function (article) {
+                            return document.querySelectorAll('article').forEach(function (article) {
                                 var _a, _b, _c;
                                 return ({
                                     link: (_b = (_a = article === null || article === void 0 ? void 0 : article.parentElement) === null || _a === void 0 ? void 0 : _a.querySelector('a')) === null || _b === void 0 ? void 0 : _b.href,
@@ -115,22 +157,22 @@ function getNews(term, lang) {
                                 });
                             });
                         })];
-                case 8:
-                    res = _a.sent();
-                    return [3 /*break*/, 10];
-                case 9: return [2 /*return*/, err];
-                case 10:
-                    if (!res) return [3 /*break*/, 12];
+                case 17:
+                    res = _b.sent();
+                    return [3 /*break*/, 19];
+                case 18: return [2 /*return*/, err];
+                case 19:
+                    if (!res) return [3 /*break*/, 21];
                     CATCH.set(url, res);
                     return [4 /*yield*/, context.close()];
-                case 11:
-                    _a.sent();
+                case 20:
+                    _b.sent();
                     return [2 /*return*/, res];
-                case 12: return [3 /*break*/, 14];
-                case 13:
-                    error_1 = _a.sent();
+                case 21: return [3 /*break*/, 23];
+                case 22:
+                    error_1 = _b.sent();
                     return [2 /*return*/, error_1];
-                case 14: return [2 /*return*/];
+                case 23: return [2 /*return*/];
             }
         });
     });
