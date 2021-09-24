@@ -20,18 +20,20 @@ npm i hets
 
 ```sh
 
-import Answers from 'hets'
-const { news } = new Answers()
-# or
-import { news } from 'hets'
+import { news } from "hets";
+
 ```
 ## Usage
 
 ```sh
 
 # news
-getNews('') // 100 top news
-getNews('קורונה') // recent news about 'קורונה'
+let חדשות_אחרונות = await news();
+console.log(חדשות_אחרונות) // 100 top news
+
+let חדשות_על_קורונה = await news('קורונה');
+console.log(חדשות_על_קורונה) // recent news about 'קורונה' 
+
 getNews('פוליטיקה','בחירות') // recent news about 'פוליטיקה' & 'בחירות' 
 getNews('donald trump','en') // 100 recent news about 'donald trump' - english language & source 
 ```

@@ -1,2 +1,4 @@
 export { getNews as news } from './news/getNews';
-//# sourceMappingURL=index.d.ts.map
+
+
+console.log(await news());
