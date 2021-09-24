@@ -1,10 +1,10 @@
 {
   "name": "hets",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "open-source engine with API for Real-time questions In Hebrew.",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "type": "module",
-  "types": "lib", 
+  "types": "./lib/index.d.ts", 
   "files": [
     "lib/**/*"
   ],
@@ -34,8 +34,8 @@
   },
   "homepage": "https://github.com/gurelbs/hets#readme",
   "dependencies": {
-    "puppeteer": "^10.4.0",
-    "typescript": "^4.4.3"
+    "puppeteer": "latest",
+    "typescript": "next"
   },
   "devDependencies": {
     "tslint": "^6.1.3"
