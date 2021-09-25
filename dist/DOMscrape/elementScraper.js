@@ -28,7 +28,9 @@ function elementScraper(url, selector) {
             console.log(currentElementChildNodes);
             const currentElementChildNodesArray = [...currentElementChildNodes];
             for (const childEl of currentElementChildNodesArray) {
-                elementScraper(url, childEl);
+                if (childEl) {
+                    elementScraper(url, childEl);
+                }
             }
         }
         else {

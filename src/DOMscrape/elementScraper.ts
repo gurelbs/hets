@@ -13,7 +13,9 @@ export async function elementScraper(url:string, selector:string): Promise<strin
     console.log(currentElementChildNodes);
     const currentElementChildNodesArray = [...currentElementChildNodes]
     for (const childEl of currentElementChildNodesArray){
-      elementScraper(url, childEl)
+      if (childEl){
+        elementScraper(url, childEl)
+      }
     }
   } else {
     const textContent = await page.evaluate(el => el?.innerText,currentElement)
