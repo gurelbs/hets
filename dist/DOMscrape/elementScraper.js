@@ -22,14 +22,14 @@ function elementScraper(url, selector) {
         yield page.goto(url);
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
-        const elementCount = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childElementCount, currentElement);
-        if (elementCount > 0) {
-            const childNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
-            const childNodesArray = [...childNodes];
-            childNodesArray.map(childNode => elementScraper(url, childNode));
+        const currentElementCount = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childElementCount, currentElement);
+        if (currentElementCount > 0) {
+            const currentElementChildNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
+            const currentElementChildNodesArray = [...currentElementChildNodes];
+            currentElementChildNodesArray.map(childNode => elementScraper(url, childNode));
         }
         else {
-            const textContent = yield page.evaluate(el => el.textContent, currentElement);
+            const textContent = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.textContent, currentElement);
             result.push(textContent);
         }
         yield browser.close();
