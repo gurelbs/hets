@@ -22,9 +22,11 @@ function elementScraper(url, selector) {
         yield page.goto(url);
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
+        console.log(currentElement);
         const currentElementCount = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childElementCount, currentElement);
         if (currentElementCount > 0) {
             const currentElementChildNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
+            console.log(currentElementChildNodes);
             const currentElementChildNodesArray = [...currentElementChildNodes];
             currentElementChildNodesArray.map(childNode => elementScraper(url, childNode));
         }

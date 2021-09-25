@@ -7,9 +7,11 @@ export async function elementScraper(url:string, selector:string): Promise<strin
   await page.goto(url)
   await page.waitForSelector(selector)
   const currentElement = await page.$(selector)
+  console.log(currentElement);
   const currentElementCount = await page.evaluate(el => el?.childElementCount,currentElement)
   if (currentElementCount > 0) {
     const currentElementChildNodes = await page.evaluate(el => el?.childNodes,currentElement)
+    console.log(currentElementChildNodes);
     const currentElementChildNodesArray = [...currentElementChildNodes]
     currentElementChildNodesArray.map( childNode => elementScraper(url, childNode))
   } else {
