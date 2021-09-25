@@ -21,50 +21,31 @@ function elementScraper(url, selector) {
         yield page.goto(url);
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
+        const childElementCount = yield page.evaluate(el => el.childElementCount, currentElement);
+        if (childElementCount > 0) {
+            const childs = yield page.evaluate(el => [...el.childNodes], currentElement);
+            childs.map((child) => elementScraper(url, child));
+        }
         const res = yield page.evaluate((el, i) => {
             const result = [];
-            if (el && el.childElementCount > 0) {
-                result.push({
-                    number: `${++i}`,
-                    name: el.name,
-                    childNumber: el.childElementCount,
-                    innerText: el.innerText,
-                    innerHTML: el.innerHTML,
-                    attributes: el.attributes,
-                    className: el.className,
-                    id: el.id,
-                    value: el.value,
-                    checked: el.checked,
-                    selected: el.selected,
-                    disabled: el.disabled,
-                    type: el.type,
-                    placeholder: el.placeholder,
-                    src: el.src,
-                    href: el.href,
-                });
-                const childs = [...el.childNodes];
-                childs.map((child) => elementScraper(url, child));
-            }
-            else {
-                result.push({
-                    number: `${++i}`,
-                    name: el.name,
-                    childNumber: el.childElementCount,
-                    innerText: el.innerText,
-                    innerHTML: el.innerHTML,
-                    attributes: el.attributes,
-                    className: el.className,
-                    id: el.id,
-                    value: el.value,
-                    checked: el.checked,
-                    selected: el.selected,
-                    disabled: el.disabled,
-                    type: el.type,
-                    placeholder: el.placeholder,
-                    src: el.src,
-                    href: el.href,
-                });
-            }
+            result.push({
+                number: `${++i}`,
+                name: el.name,
+                childNumber: el.childElementCount,
+                innerText: el.innerText,
+                innerHTML: el.innerHTML,
+                attributes: el.attributes,
+                className: el.className,
+                id: el.id,
+                value: el.value,
+                checked: el.checked,
+                selected: el.selected,
+                disabled: el.disabled,
+                type: el.type,
+                placeholder: el.placeholder,
+                src: el.src,
+                href: el.href,
+            });
             return result;
         }, currentElement);
         yield browser.close();
