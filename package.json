@@ -1,6 +1,6 @@
 {
   "name": "hets",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "description": "open-source engine with API for Real-time questions In Hebrew.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts", 
