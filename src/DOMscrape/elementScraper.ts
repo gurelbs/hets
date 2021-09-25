@@ -1,8 +1,8 @@
 import puppeteer from 'puppeteer'
 
 export async function elementScraper(url:string, selector:string): Promise<string | string[]>{
-  const result:any= [];
-  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+  const result:any = [];
+  const browser = await puppeteer.launch({ headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox'] })
   const page = await browser.newPage()
   await page.goto(url)
   await page.waitForSelector(selector)
@@ -28,7 +28,7 @@ export async function elementScraper(url:string, selector:string): Promise<strin
         href: el.href,
       })
       if (el.childElementCount > 0) {
-        el.childNodes.forEach((child:any) => {
+        [...el.childNodes].map((child:any) => {
           result.push({
             number: `${++i}`,
             name: child.name,

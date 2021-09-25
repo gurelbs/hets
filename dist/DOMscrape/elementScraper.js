@@ -17,7 +17,7 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 function elementScraper(url, selector) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = [];
-        const browser = yield puppeteer_1.default.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+        const browser = yield puppeteer_1.default.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = yield browser.newPage();
         yield page.goto(url);
         yield page.waitForSelector(selector);
@@ -43,7 +43,7 @@ function elementScraper(url, selector) {
                     href: el.href,
                 });
                 if (el.childElementCount > 0) {
-                    el.childNodes.forEach((child) => {
+                    [...el.childNodes].map((child) => {
                         result.push({
                             number: `${++i}`,
                             name: child.name,
