@@ -26,15 +26,23 @@ function elementScraper(url, selector) {
         if (currentElement && currentElementCount > 0) {
             const currentElementChildNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
             const currentElementChildNodesArray = [...currentElementChildNodes];
-            for (const childEl of currentElementChildNodesArray) {
+            currentElementChildNodesArray.map(childEl => {
                 if (childEl) {
-                    elementScraper(url, childEl);
+                    if (childEl.textContent) {
+                        result.push({
+                            tagName: childEl.tagName,
+                            textContent: childEl.textContent,
+                        });
+                    }
+                    elementScraper(url, childEl.tagName);
                 }
-            }
+            });
         }
         else {
-            const textContent = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.innerText, currentElement);
-            result.push(textContent);
+            yield page.evaluate(el => result.push({
+                tagName: el.tagName,
+                textContent: el.textContent,
+            }), currentElement);
         }
         yield browser.close();
         return result;

@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer'
 
 export async function elementScraper(url:string, selector:string): Promise<string | string[]>{
-  const result = [];
+  const result:any= [];
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
   const page = await browser.newPage()
   await page.goto(url)
@@ -11,14 +11,22 @@ export async function elementScraper(url:string, selector:string): Promise<strin
   if (currentElement && currentElementCount > 0) {
     const currentElementChildNodes = await page.evaluate(el => el?.childNodes,currentElement)
     const currentElementChildNodesArray = [...currentElementChildNodes]
-    for (const childEl of currentElementChildNodesArray){
+    currentElementChildNodesArray.map( childEl => {
       if (childEl){
-        elementScraper(url, childEl)
+        if (childEl.textContent) {
+          result.push({
+            tagName: childEl.tagName,
+            textContent: childEl.textContent,
+          })
+        }
+      elementScraper(url, childEl.tagName)
       }
-    }
+    })
   } else {
-    const textContent = await page.evaluate(el => el?.innerText,currentElement)
-    result.push(textContent)
+    await page.evaluate(el => result.push({
+      tagName: el.tagName,
+      textContent: el.textContent,
+    }),currentElement)
   }
   await browser.close()
   return result
