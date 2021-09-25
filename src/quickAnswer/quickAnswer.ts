@@ -18,7 +18,7 @@ export async function quickAnswer(question:string){
         .map(x => x?.textContent)
         .filter(x => x !== ''  ||  x !== null))
       res.push(result)
-    } else return err 
+    } else return err
     await context.close();
     CATCH.set(url, res)
     return res
