@@ -28,7 +28,9 @@ function elementScraper(url, selector) {
             const currentElementChildNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
             console.log(currentElementChildNodes);
             const currentElementChildNodesArray = [...currentElementChildNodes];
-            currentElementChildNodesArray.map(childNode => elementScraper(url, childNode));
+            for (let childEl of currentElementChildNodesArray) {
+                elementScraper(url, childEl);
+            }
         }
         else {
             const textContent = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.textContent, currentElement);
