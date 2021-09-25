@@ -23,7 +23,7 @@ function elementScraper(url, selector) {
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
         const currentElementCount = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childElementCount, currentElement);
-        result.push({ currentElementCount: currentElementCount });
+        result.push({ counter: currentElementCount });
         yield browser.close();
         return result;
     });

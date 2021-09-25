@@ -8,7 +8,7 @@ export async function elementScraper(url:string, selector:string): Promise<strin
   await page.waitForSelector(selector)
   const currentElement = await page.$(selector)
   const currentElementCount = await page.evaluate(el => el?.childElementCount,currentElement)
-  result.push({currentElementCount: currentElementCount})
+  result.push({counter: currentElementCount})
   await browser.close()
   return result
 }
