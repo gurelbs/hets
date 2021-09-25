@@ -25,7 +25,7 @@ export async function elementScraper(url:string, selector:string): Promise<strin
         type: el.type,
         placeholder: el.placeholder,
         src: el.src,
-        href: el.href 
+        href: el.href,
       })
       if (el.childElementCount > 0) {
         el.childNodes.forEach((child:any) => {
