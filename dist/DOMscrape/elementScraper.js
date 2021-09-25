@@ -16,20 +16,20 @@ exports.elementScraper = void 0;
 const puppeteer_1 = __importDefault(require("puppeteer"));
 function elementScraper(url, selector) {
     return __awaiter(this, void 0, void 0, function* () {
-        let result = [];
+        const result = [];
         const browser = yield puppeteer_1.default.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = yield browser.newPage();
         yield page.goto(url);
         yield page.waitForSelector(selector);
-        const element = yield page.$(selector);
-        const elementCount = yield page.evaluate(element => element === null || element === void 0 ? void 0 : element.childElementCount, element);
+        const currentElement = yield page.$(selector);
+        const elementCount = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childElementCount, currentElement);
         if (elementCount > 0) {
-            const childNodes = yield page.evaluate(element => element === null || element === void 0 ? void 0 : element.childNodes, element);
+            const childNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
             const childNodesArray = [...childNodes];
             childNodesArray.map(childNode => elementScraper(url, childNode));
         }
         else {
-            const textContent = yield page.evaluate(element => element.textContent, element);
+            const textContent = yield page.evaluate(el => el.textContent, currentElement);
             result.push(textContent);
         }
         yield browser.close();
