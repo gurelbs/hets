@@ -16,13 +16,13 @@ exports.elementScraper = void 0;
 const puppeteer_1 = __importDefault(require("puppeteer"));
 function elementScraper(url, selector) {
     return __awaiter(this, void 0, void 0, function* () {
-        const result = [];
-        const browser = yield puppeteer_1.default.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+        const browser = yield puppeteer_1.default.launch({ slowMo: 300, headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = yield browser.newPage();
         yield page.goto(url);
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
-        yield page.evaluate((el, i) => {
+        let res = yield page.evaluate((el, i) => {
+            const result = [];
             if (el) {
                 result.push({
                     number: `${++i}`,
@@ -67,7 +67,7 @@ function elementScraper(url, selector) {
             }
         }, currentElement);
         yield browser.close();
-        return result;
+        return res;
     });
 }
 exports.elementScraper = elementScraper;

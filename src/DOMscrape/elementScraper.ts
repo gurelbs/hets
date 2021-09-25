@@ -1,13 +1,13 @@
 import puppeteer from 'puppeteer'
 
-export async function elementScraper(url:string, selector:string): Promise<string | string[]>{
-  const result:any = [];
-  const browser = await puppeteer.launch({ headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+export async function elementScraper(url:string, selector:string): Promise<any>{
+  const browser = await puppeteer.launch({ slowMo: 300, headless:false, args: ['--no-sandbox', '--disable-setuid-sandbox'] })
   const page = await browser.newPage()
   await page.goto(url)
   await page.waitForSelector(selector)
   const currentElement = await page.$(selector)
-  await page.evaluate((el, i) => {
+  let res = await page.evaluate((el, i) => {
+    const result:any = [];
     if (el) {
       result.push({
         number: `${++i}`,
@@ -52,5 +52,5 @@ export async function elementScraper(url:string, selector:string): Promise<strin
     }
   },currentElement)
   await browser.close()
-  return result
+  return res
 }
