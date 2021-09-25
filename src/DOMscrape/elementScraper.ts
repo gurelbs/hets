@@ -13,7 +13,7 @@ export async function elementScraper(url:string, selector:string): Promise<strin
     const currentElementChildNodes = await page.evaluate(el => el?.childNodes,currentElement)
     console.log(currentElementChildNodes);
     const currentElementChildNodesArray = [...currentElementChildNodes]
-    for (let childEl of currentElementChildNodesArray){
+    for (const childEl of currentElementChildNodesArray){
       elementScraper(url, childEl)
     }
   } else {
