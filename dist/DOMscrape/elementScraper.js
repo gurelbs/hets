@@ -42,7 +42,8 @@ function elementScraper(url, selector) {
                     src: el.src,
                     href: el.href,
                 });
-                el.children.forEach((child) => elementScraper(url, child));
+                let childs = [...el.childNodes];
+                childs.map((child) => elementScraper(url, child));
             }
             else {
                 result.push({
