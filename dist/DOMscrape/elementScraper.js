@@ -32,7 +32,7 @@ function elementScraper(url, selector) {
             }
         }
         else {
-            const textContent = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.textContent, currentElement);
+            const textContent = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.innerText, currentElement);
             result.push(textContent);
         }
         yield browser.close();

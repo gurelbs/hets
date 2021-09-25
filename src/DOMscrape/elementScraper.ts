@@ -16,7 +16,7 @@ export async function elementScraper(url:string, selector:string): Promise<strin
       elementScraper(url, childEl)
     }
   } else {
-    const textContent = await page.evaluate(el => el?.textContent,currentElement)
+    const textContent = await page.evaluate(el => el?.innerText,currentElement)
     result.push(textContent)
   }
   await browser.close()
