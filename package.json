@@ -1,6 +1,6 @@
 {
   "name": "hets",
-  "version": "1.0.45",
+  "version": "1.0.47",
   "description": "open-source engine with API for Real-time questions In Hebrew.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts", 
@@ -11,7 +11,7 @@
     "prepublishOnly": "npm run lint",
     "lint": "tslint -p tsconfig.json",
     "build": "tsc -p .",
-    "github": "git add . && git commit -m 'updated' && git push origin main",
+    "github": "git add . && git commit -m 'added' && git push origin main",
     "deploy": "npm run build && npm run github && npm publish"
   },
   "repository": {
