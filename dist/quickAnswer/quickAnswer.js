@@ -17,19 +17,19 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 const CATCH = new Map();
 function quickAnswer(question) {
     return __awaiter(this, void 0, void 0, function* () {
-        let res = [];
-        let err = 'לא מצאתי תשובה ל' + question;
+        const res = [];
+        const err = 'לא מצאתי תשובה ל' + question;
         try {
-            let url = `https://google.com/search?q=${question}&hl=he`;
+            const url = `https://google.com/search?q=${question}&hl=he`;
             if (CATCH.has(url))
                 return CATCH.get(url);
             const browser = yield puppeteer_1.default.launch({ args: ['--no-sandbox'] });
             const context = yield browser.createIncognitoBrowserContext();
             const page = yield context.newPage();
             yield page.goto(url);
-            let answers = yield page.$('div[data-attrid]');
+            const answers = yield page.$('div[data-attrid]');
             if (answers) {
-                let result = yield page.evaluate(() => [...document
+                const result = yield page.evaluate(() => [...document
                         .querySelectorAll('div[data-attrid]')]
                     .map(x => x === null || x === void 0 ? void 0 : x.textContent)
                     .filter(x => x !== '' || x !== null));

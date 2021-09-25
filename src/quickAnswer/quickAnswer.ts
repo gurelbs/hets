@@ -2,18 +2,18 @@ import puppeteer from 'puppeteer';
 const CATCH = new Map()
 
 export async function quickAnswer(question:string){
-  let res = []
-  let err = 'לא מצאתי תשובה ל' + question;
+  const res = []
+  const err = 'לא מצאתי תשובה ל' + question;
   try {
-    let url = `https://google.com/search?q=${question}&hl=he`
+    const url = `https://google.com/search?q=${question}&hl=he`
     if (CATCH.has(url)) return CATCH.get(url)
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const context = await browser.createIncognitoBrowserContext()
     const page = await context.newPage();
     await page.goto(url);
-    let answers = await page.$('div[data-attrid]')
+    const answers = await page.$('div[data-attrid]')
     if(answers) {
-      let result = await page.evaluate( () => [...document
+      const result = await page.evaluate( () => [...document
         .querySelectorAll('div[data-attrid]')]
         .map(x => x?.textContent)
         .filter(x => x !== ''  ||  x !== null))
