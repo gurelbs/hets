@@ -8,26 +8,7 @@ export async function elementScraper(url:string, selector:string): Promise<strin
   await page.waitForSelector(selector)
   const currentElement = await page.$(selector)
   const currentElementCount = await page.evaluate(el => el?.childElementCount,currentElement)
-  if (currentElement && currentElementCount > 0) {
-    const currentElementChildNodes = await page.evaluate(el => el?.childNodes,currentElement)
-    const currentElementChildNodesArray = [...currentElementChildNodes]
-    currentElementChildNodesArray.map( childEl => {
-      if (childEl){
-        if (childEl.textContent) {
-          result.push({
-            tagName: childEl.tagName,
-            textContent: childEl.textContent,
-          })
-        }
-      elementScraper(url, childEl.tagName)
-      }
-    })
-  } else {
-    await page.evaluate(el => result.push({
-      tagName: el.tagName,
-      textContent: el.textContent,
-    }),currentElement)
-  }
+  result.push({currentElementCount: currentElementCount})
   await browser.close()
   return result
 }

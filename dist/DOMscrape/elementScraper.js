@@ -23,27 +23,7 @@ function elementScraper(url, selector) {
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
         const currentElementCount = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childElementCount, currentElement);
-        if (currentElement && currentElementCount > 0) {
-            const currentElementChildNodes = yield page.evaluate(el => el === null || el === void 0 ? void 0 : el.childNodes, currentElement);
-            const currentElementChildNodesArray = [...currentElementChildNodes];
-            currentElementChildNodesArray.map(childEl => {
-                if (childEl) {
-                    if (childEl.textContent) {
-                        result.push({
-                            tagName: childEl.tagName,
-                            textContent: childEl.textContent,
-                        });
-                    }
-                    elementScraper(url, childEl.tagName);
-                }
-            });
-        }
-        else {
-            yield page.evaluate(el => result.push({
-                tagName: el.tagName,
-                textContent: el.textContent,
-            }), currentElement);
-        }
+        result.push({ currentElementCount: currentElementCount });
         yield browser.close();
         return result;
     });
