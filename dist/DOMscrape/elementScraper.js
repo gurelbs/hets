@@ -42,7 +42,7 @@ function elementScraper(url, selector) {
                     src: el.src,
                     href: el.href,
                 });
-                let childs = [...el.childNodes];
+                const childs = [...el.childNodes];
                 childs.map((child) => elementScraper(url, child));
             }
             else {

@@ -27,7 +27,7 @@ export async function elementScraper(url:string, selector:string): Promise<any>{
         src: el.src,
         href: el.href,
       })
-      let childs = [...el.childNodes]
+      const childs = [...el.childNodes]
       childs.map((child:any) => elementScraper(url, child))
     } else {
       result.push({
