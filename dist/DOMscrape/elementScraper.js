@@ -21,7 +21,7 @@ function elementScraper(url, selector) {
         yield page.goto(url);
         yield page.waitForSelector(selector);
         const currentElement = yield page.$(selector);
-        let res = yield page.evaluate((el, i) => {
+        const res = yield page.evaluate((el, i) => {
             const result = [];
             if (el) {
                 result.push({
@@ -65,6 +65,7 @@ function elementScraper(url, selector) {
                     });
                 }
             }
+            return result;
         }, currentElement);
         yield browser.close();
         return res;

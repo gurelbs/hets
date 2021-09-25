@@ -6,7 +6,7 @@ export async function elementScraper(url:string, selector:string): Promise<any>{
   await page.goto(url)
   await page.waitForSelector(selector)
   const currentElement = await page.$(selector)
-  let res = await page.evaluate((el, i) => {
+  const res = await page.evaluate((el, i) => {
     const result:any = [];
     if (el) {
       result.push({
@@ -50,6 +50,7 @@ export async function elementScraper(url:string, selector:string): Promise<any>{
         })
       }
     }
+    return result
   },currentElement)
   await browser.close()
   return res
