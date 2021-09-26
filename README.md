@@ -34,8 +34,8 @@ news().then(console.log)
 news('קורונה').then(console.log) 
 // recent news about 'קורונה'
 
-news(['קורונה','ביטקוין']).then(console.log) 
-// recent news about 'קורונה' & 'ביטקוין' 
+news(['הייטק','ביטקוין']).then(console.log) 
+// recent news about 'הייטק' & 'ביטקוין' 
 
 news('donald trump','en').then(console.log) 
 // 100 recent news about 'donald trump' in English 
