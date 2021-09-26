@@ -25,17 +25,21 @@ import { news } from "hets";
 ```
 ## Usage
 
+### news
 ```sh
 
-# news
-let חדשות_אחרונות = await news();
-console.log(חדשות_אחרונות) // 100 top news
+news().then(console.log) 
+// 100 top news
 
-let חדשות_על_קורונה = await news('קורונה');
-console.log(חדשות_על_קורונה) // recent news about 'קורונה' 
+news('קורונה').then(console.log) 
+// recent news about 'קורונה'
 
-getNews('פוליטיקה','בחירות') // recent news about 'פוליטיקה' & 'בחירות' 
-getNews('donald trump','en') // 100 recent news about 'donald trump' - english language & source 
+news(['קורונה','ביטקוין']).then(console.log) 
+// recent news about 'קורונה' & 'ביטקוין' 
+
+news('donald trump','en').then(console.log) 
+// 100 recent news about 'donald trump' in English 
+
 ```
  
 ## Author
