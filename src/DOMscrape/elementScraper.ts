@@ -6,11 +6,9 @@ export async function elementScraper(url:string, selector:string): Promise<any>{
   await page.goto(url)
   await page.waitForSelector(selector)
   const currentElement = await page.$(selector)
+  if (!currentElement) return 'element not found'
   const childElementCount = await page.evaluate(el => el.childElementCount, currentElement)
-  if (childElementCount > 0) {
-    const childs = await page.evaluate(el => [...el.childNodes], currentElement)
-    childs.map((child:any) => elementScraper(url, child))
-  }
+  const childs = await page.evaluate(el => [...el.childNodes], currentElement);
   const res = await page.evaluate((el, i) => {
     const result:any = [];
       result.push({
